@@ -7,7 +7,7 @@ const ServiceCard = ({ service }) => (
         <h5 className="card-title">{service.name}</h5>
         <p className="card-text">{service.description}</p>
         <p className="card-text"><strong>Preço: {service.price}</strong></p>
-        <button className="btn btn-primary col-sm-6 ms-3" type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${service.id}`} aria-expanded="false" aria-controls={`collapse${service.id}`}>
+        <button className="btn btn-primary col-sm-6 ms-3" style={{maxHeight:'39px'}} type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${service.id}`} aria-expanded="false" aria-controls={`collapse${service.id}`}>
           Detalhes
         </button>
         <div className="collapse m-2" id={`collapse${service.id}`}>

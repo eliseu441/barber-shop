@@ -26,7 +26,7 @@ const CarouselItem = ({ service, isActive }) => (
     <div className="carousel-item-container d-flex justify-content-center align-items-center">
       <div className="row">
         <div className="d-flex justify-content-center">
-          <div className="col-12 d-flex justify-content-center text-center row">
+          <div style={{maxWidth:'800px'}}className="col-12 d-flex justify-content-center text-center row">
             <img src={`/images/barbearia/${service.carouselName}`} className="img-slider-barber col-12" alt={service.name} />
             <div className="col-sm-12 d-flex justify-content-center">
               <div className="carousel-caption col-sm-3">
