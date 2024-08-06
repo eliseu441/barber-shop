@@ -1,4 +1,10 @@
-import { render } from 'preact'
-import App from './app.jsx'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Barber from './pages/Barbearia/homeBarber/Barber';
 
-render(<App />, document.getElementById('app'))
+ReactDOM.render(
+    <React.StrictMode>
+        <Barber />
+    </React.StrictMode>,
+    document.getElementById('root')
+);

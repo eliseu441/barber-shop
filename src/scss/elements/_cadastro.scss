@@ -1,7 +1,7 @@
 .pagina-cadastro {
     color: white!important;
-    height: 100vh;
-    background-color: #707070;
+    height: 100dvh;
+    background-color: #000000;
     background-image: url('./images/bg_cadastro.jpeg');
     background-size: cover;
     .inputText{
@@ -9,11 +9,14 @@
         letter-spacing: 1.1px;
     }
     .card-cadastro {
-        background-color: rgba(54, 54, 54, 0.2); /* Fundo branco com 50% de transparência */
+        background-color: rgba(54, 54, 54, 0.5); /* Fundo branco com 50% de transparência */
         backdrop-filter: blur(1px); /* Efeito de desfoque de 1px */
-        border: 2px solid rgb(39, 39, 39); 
+        border: 2px solid rgb(87, 87, 87); 
         padding: 20px;
-        border-radius: 8px;
+        border-radius: 15px;
+        -webkit-box-shadow: inset -2px -1px 119px -43px rgba(255,255,255,0.3);
+        -moz-box-shadow: inset -2px -1px 119px -43px rgba(255,255,255,0.3);
+        box-shadow: inset -2px -1px 119px -43px rgba(255,255,255,0.3);
 
 
         h2 {
@@ -38,14 +41,15 @@
 
         button {
             padding: 10px;
-            background-color: #616161;
+            background-color: #c07300;
+            width: 100%;
             color: #fff;
             border: none;
             border-radius: 6px;
             cursor: pointer;
 
             &:hover {
-                background-color: #000000;
+                background-color: #e08700;
             }
         }
     }
