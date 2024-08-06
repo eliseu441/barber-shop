@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Barber from './pages/Barbearia/homeBarber/Barber';
+import App from './app';
 
 ReactDOM.render(
     <React.StrictMode>
-        <Barber />
+         <App />
     </React.StrictMode>,
     document.getElementById('root')
 );

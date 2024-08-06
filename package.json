@@ -13,6 +13,7 @@
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
     "preact": "^10.5.13",
+    "react-router-dom": "^6.26.0",
     "sass": "^1.77.8",
     "scss": "^0.2.4"
   },

@@ -1,8 +1,23 @@
+@keyframes moveBackground {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
 .pagina-servicos{
+    background-image: url("./images/barbearia/bg_services2.avif");
+    background-color: #d1d1d6; 
+    min-height: 100dvh;
     padding:0;
     margin: 0;
+    animation: moveBackground 15s linear infinite;
 }
+
+
 .slider-container {
+    border-radius: 0;
     position: relative;
     overflow: hidden;
 }
@@ -46,45 +61,37 @@
     padding: 10px;
     border-radius: 10px;
 }
-
-.carousel-caption h3,
-.carousel-caption p {
-    margin: 0;
-    color: #fff;
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-    position: absolute;
+/* Dark theme colors */
+.dark-theme {
+    background-color: #1c1c1e; /* Dark background similar to Apple's dark mode */
+    color: #f5f5f7; /* Light text color */
+  }
+  
+  .dark-theme .carousel-title {
+    color: #f5f5f7;
+  }
+  
+  .dark-theme .carousel-caption h3,
+  .dark-theme .carousel-caption p,
+  .dark-theme .carousel-caption .price {
+    color: #f5f5f7;
+  }
+  
+  /* Centralize the arrows vertically */
+  .carousel-control-prev,
+  .carousel-control-next {
     top: 50%;
     transform: translateY(-50%);
-    background: none;
-    border: none;
-    font-size: 2rem;
-    color: white;
-    cursor: pointer;
-}
-
-.carousel-control-prev {
-    left: 10px;
-}
-
-.carousel-control-next {
-    right: 10px;
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    padding: 10px;
-}
-
-.carousel-control-prev-icon:hover,
-.carousel-control-next-icon:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-/* Estilos personalizados para o carrossel */
+  }
+  .carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+   }
+   
+   .carousel-control-next-icon {
+     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+   }
+  
+  /* Estilos personalizados para o carrossel */
 .slider-container {
     padding: 20px;
 }
@@ -105,7 +112,6 @@
 .carousel-caption {
     margin-left: 18%;
     background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
     text-align: center; 
     word-wrap: break-word; 
     position: absolute;
@@ -123,20 +129,12 @@
 /* Estilos responsivos */
 @media (max-width: 768px) {
     
-    .carousel-item-container {
-        height: auto;
-    }
+}
+.title-services{
 
-    .carousel-caption {
-        font-size: 14px;
-        margin-left: 0!important;
-    }
+    font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
+    color: white;
+    letter-spacing: 1px;
 
-    .carousel-caption h3 {
-        font-size: 16px; /* Ajusta o tamanho da fonte para mobile */
-    }
-
-    .price {
-        font-size: 18px;
-    }
 }
