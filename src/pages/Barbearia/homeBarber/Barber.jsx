@@ -4,8 +4,6 @@ import Carousel from './carousel';
 import ServiceList from './serviceList';
 import ServiceCard from './serviceCard';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const Barber = () => {
   const [topServices] = useState([
@@ -20,19 +18,23 @@ const Barber = () => {
     { id: 2, name: 'Barba', description: 'Aparar e modelar a barba', price: 'R$ 30', details: 'Inclui hidratação da barba.', genericDetails: 'Utilizamos produtos de alta qualidade.' },
     { id: 3, name: 'Corte + Barba', description: 'Pacote completo de corte e barba', price: 'R$ 70', details: 'Pacote promocional.', genericDetails: 'Pacote econômico para um visual completo.' },
     { id: 4, name: 'Descoloração capilar', description: 'Preço para descoloração completa', price: 'R$ 40', details: 'Duração de 30 minutos.', genericDetails: 'Procedimento seguro e eficaz.' },
-    { id: 5, name: 'Hidratação', description: 'Tratamento completo para os cabelos', price: 'R$ 100', details: 'Inclui hidratação e reconstrução.', genericDetails: 'Tratamento profundo para cabelos saudáveis.' }
-  ]);
+    { id: 5, name: 'Hidratação', description: 'Tratamento completo para os cabelos', price: 'R$ 100', details: 'Inclui hidratação e reconstrução.', genericDetails: 'Tratamento profundo para cabelos saudáveis.' },
+    { id: 6, name: 'Hiadrata ção', description: 'Tratamento caompleto para os cabelos', price: 'R$ 10a0', details: 'Incalui hidratação e reconstrução.', genericDetails: 'Tratamento profundo para cabelos saudáveis.' },
+]);
 
   return (
     <div className="pagina-servicos col-sm-12">
       <Carousel topServices={topServices} />
       <ServiceList services={services} />
+      <a
+        href="/#/calendario"
+        className="btn btn-warning position-fixed scheduleButton">
       <button 
         className="btn btn-warning position-fixed scheduleButton" 
       >
         Agende Agora
       </button>
-      
+      </a>
     </div>
   );
 };

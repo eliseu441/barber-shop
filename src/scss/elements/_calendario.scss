@@ -1,0 +1,62 @@
+.pagina-calendario {
+    margin: 20px;
+  
+    .fc {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      background-color: #fff;
+      padding: 20px;
+    }
+  
+    .fc-toolbar {
+      background-color: #f8f9fa;
+      border-bottom: 1px solid #dee2e6;
+      padding: 10px;
+      border-radius: 8px 8px 0 0;
+  
+      .fc-toolbar-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+      }
+  
+      button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+  
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+  
+    .fc-event {
+      background-color: #007bff;
+      border: none;
+      color: #fff;
+      padding: 5px;
+      border-radius: 4px;
+    }
+  
+    @media (max-width: 768px) {
+      .fc {
+        padding: 10px;
+      }
+  
+      .fc-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+  
+        .fc-toolbar-title {
+          font-size: 1rem;
+        }
+  
+        button {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
