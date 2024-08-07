@@ -13,7 +13,7 @@
     "@fullcalendar/daygrid": "^6.1.15",
     "@fullcalendar/react": "^6.1.15",
     "@popperjs/core": "^2.11.8",
-    "@preact/preset-vite": "^2.9.0",
+    "@vitejs/plugin-react": "^4.3.1",
     "axios": "^1.7.3",
     "bootstrap": "^5.3.3",
     "install": "^0.13.0",
