@@ -1,14 +1,27 @@
 import API from '../Api';
 class calendarEdit {
+    allDates = async () => {
+
+        try {
+            const response = await API.get(`/allCalendar`);
+
+                return response;
+            
+
+            return [];
+
+        } catch (err) {
+            throw err;
+        }
+
+    };
     insertDates = async (params) => {
 
         try {
             const response = await API.post(`/createSchedule`, params);
 
-            if (response.status === 200) {
-                const data = response.data;
-                return data;
-            }
+                return response;
+            
 
             return [];
 

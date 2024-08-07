@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity('user')
 export class User {
@@ -13,6 +13,9 @@ export class User {
 
     @Column()
     password: string;
+
+    @Column({ type: 'int', default: 2 })
+    permission: number; // Adiciona a coluna de permissão
 
     @OneToMany(() => Event, event => event.user)
     events: Event[];
@@ -35,6 +38,10 @@ export class Event {
   @Column({ length: 500, nullable: true })
   description?: string;
 
+  @Column({ type: 'int', nullable: false })
+  viewer_id?: number; // Adiciona a coluna viewerId
+
   @ManyToOne(() => User, user => user.events)
+  @JoinColumn({ name: 'user_id' }) // Especifica o nome da coluna de junção
   user: User;
 }

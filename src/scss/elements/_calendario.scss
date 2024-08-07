@@ -1,17 +1,7 @@
-.rbc-day-bg {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+
+.rbc-button-link{
   width: 100%;
-  font-size: 1.2em;
 }
-/* Centralizar os números de cada dia */
-.calendar-day {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%; /* Certifique-se de que o elemento ocupe toda a altura disponível */
-  width: 100%; /* Certifique-se de que o elemento ocupe toda a largura disponível */
-  font-size: 1.2em; /* Ajuste o tamanho da fonte conforme necessário */
+.rbc-event-content{
+  font-size: 1rem;
 }

@@ -17,18 +17,27 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Controller('api')
 export class CalendarController {
-  constructor(private readonly calendarService: CalendarService) { }
+  constructor(
+    private readonly calendarService: CalendarService,
+  ) {}
 
-  /* @Get('/getAllSchedules')
-   getBCbuilds() {
-     return this.calendarService.getBCbuilds();
-   }
- */
-  // @UseGuards(JwtAuthGuard)
   @Post('/createSchedule')
-  create(@Body() createCalendarDto: CreateCalendarDto) {
-    const { title, start, end_time, description, userId } = createCalendarDto;
-    return this.calendarService.createCalendar({ title, start, end_time, description, userId });
+  async create(@Body() createCalendarDto: CreateCalendarDto) {
+    const { title, start, end_time, description, user_id, viewer_id } = createCalendarDto;
+
+    // Encontra o usuário pelo ID
+
+    // Cria o evento associado ao usuário
+    const event = await this.calendarService.createCalendar({
+      user_id,
+      title,
+      start,
+      end_time,
+      description,
+      viewer_id,
+    });
+
+    return event;
   }
 
   @Get('/allCalendar')

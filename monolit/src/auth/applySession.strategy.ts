@@ -11,9 +11,9 @@ export class ApplySessionStrategy extends PassportStrategy(Strategy, 'applySessi
     if (!user) { 
       throw new UnauthorizedException(); 
     } 
-    const { userId, username } = user; 
+    const { user_id, username } = user; 
     return { 
-      userId, 
+      user_id, 
       username, 
     }; 
   } 

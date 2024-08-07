@@ -4,6 +4,7 @@ import moment from 'moment';
 import 'moment/locale/pt-br'; // Importar o locale do moment para português
 import 'react-big-calendar/lib/css/react-big-calendar.css'; // Importar os estilos do calendário
 import APIS from '../../api/Calendar/Calendar'; 
+import { useEffect } from 'preact/hooks';
 
 // Configurar o moment para usar o locale em português
 moment.locale('pt-br');
@@ -28,24 +29,26 @@ const messages = {
 };
 
 const Calendario = () => {
-  const [events, setEvents] = useState([
-    {
-      title: 'Reunião com cliente',
-      start: new Date(2023, 9, 10, 10, 0), // 10 de Outubro de 2023, 10:00 AM
-      end: new Date(2023, 9, 10, 12, 0),   // 10 de Outubro de 2023, 12:00 PM
-    },
-    {
-      title: 'Consulta médica',
-      start: new Date(2023, 9, 11, 14, 0), // 11 de Outubro de 2023, 2:00 PM
-      end: new Date(2023, 9, 11, 15, 0),   // 11 de Outubro de 2023, 3:00 PM
-    },
-    {
-      title: 'Almoço com amigo',
-      start: new Date(2023, 9, 12, 12, 0), // 12 de Outubro de 2023, 12:00 PM
-      end: new Date(2023, 9, 12, 13, 0),   // 12 de Outubro de 2023, 1:00 PM
-    },
-  ]);
+  const [events, setEvents] = useState([]);
+  const [data, setData] = useState([]);
 
+  async function getDates() {
+    try {
+      const response = await APIS.allDates()
+      const formattedEvents = await response.data.map(event => ({
+        title: event.title,
+        start: new Date(event.start),
+        end: new Date(event.end)
+      }));
+      console.log(formattedEvents)
+      setData(formattedEvents);
+    } catch (err) {
+      throw err;
+    }
+  }
+  useEffect(() => {
+    getDates();
+  },[]);
   const handleSelectSlot = async ({ start, end }) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Zerar horas para comparar apenas a data
@@ -74,11 +77,10 @@ const Calendario = () => {
     if (title) {
       const formattedStart = moment(start).format('YYYY-MM-DDTHH:mm:ss');
       const formattedEnd = moment(end).format('YYYY-MM-DDTHH:mm:ss');
-      const newEvent = { title, start: formattedStart, end_time: formattedEnd, description: '', userId: 1 }; // Supondo userId = 1
+      const newEvent = { title, start: formattedStart, end_time: formattedEnd, description: '', user_id: 1,  viewer_id: 1 }; // Supondo userId = 1
 
       try {
-        return console.log(newEvent)
-        const response = await APIS.insertDates({ newEvent });
+        const response = await APIS.insertDates(newEvent);
         setEvents([...events, response.data]);
       } catch (error) {
         console.error('Erro ao criar evento:', error);
@@ -91,7 +93,7 @@ const Calendario = () => {
     <div className="pagina-calendario col-sm-12">
       <Calendar
         localizer={localizer}
-        events={events}
+        events={data}
         startAccessor="start"
         endAccessor="end"
         selectable
@@ -99,13 +101,13 @@ const Calendario = () => {
         messages={messages} // Adicionar as mensagens traduzidas
         style={{
           height: '100vh',
-          backgroundColor: '#f8f9fa', 
+          backgroundColor: 'rgb(234, 245, 255)', 
           padding: '20px',
           borderRadius: '10px', 
-          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
-          fontFamily: 'Arial, sans-serif', 
+          fontFamily: 'Roboto, sans-serif', 
+          fontSize: '1.4rem',
           textAlign: 'center!important',
-          color: '#333'
+          color: 'black'
         }}
       />
     </div>
