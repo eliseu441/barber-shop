@@ -1,8 +1,4 @@
 
-import Cadastro from './pages/cadastro/Cadastro';
-import Barber from './pages/Barbearia/homeBarber/Barber';
-import Calendario from './pages/CalendarioBarbearia/Calendario';
-
 
 const App = () => {
   return (
