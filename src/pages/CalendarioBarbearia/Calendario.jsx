@@ -1,11 +1,31 @@
 import React, { useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'moment/locale/pt-br'; // Importar o locale do moment para português
+import 'react-big-calendar/lib/css/react-big-calendar.css'; // Importar os estilos do calendário
+import APIS from '../../api/Calendar/Calendar'; 
+
+// Configurar o moment para usar o locale em português
+moment.locale('pt-br');
 
 const localizer = momentLocalizer(moment);
+
+// Definir as traduções para o calendário
+const messages = {
+  allDay: 'Dia inteiro',
+  previous: 'Anterior',
+  next: 'Próximo',
+  today: 'Hoje',
+  month: 'Mês',
+  week: 'Semana',
+  day: 'Dia',
+  agenda: 'Agenda',
+  date: 'Data',
+  time: 'Hora',
+  event: 'Evento',
+  noEventsInRange: 'Não há eventos neste intervalo.',
+  showMore: total => `+ Ver mais (${total})`
+};
 
 const Calendario = () => {
   const [events, setEvents] = useState([
@@ -26,10 +46,44 @@ const Calendario = () => {
     },
   ]);
 
-  const handleSelectSlot = ({ start, end }) => {
+  const handleSelectSlot = async ({ start, end }) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Zerar horas para comparar apenas a data
+
+    if (start < today) {
+      alert('Não é possível agendar eventos em datas anteriores a hoje.');
+      return;
+    }
+
+    // Verificar se o evento começa e termina no mesmo dia
+    if (start.toDateString() !== end.toDateString()) {
+      alert('O evento deve começar e terminar no mesmo dia.');
+      return;
+    }
+
+    const isCollision = events.some(event => 
+      (start < event.end && end > event.start)
+    );
+
+    if (isCollision) {
+      alert('O horário do novo evento colide com um evento existente.');
+      return;
+    }
+
     const title = window.prompt('Novo evento:');
     if (title) {
-      setEvents([...events, { start, end, title }]);
+      const formattedStart = moment(start).format('YYYY-MM-DDTHH:mm:ss');
+      const formattedEnd = moment(end).format('YYYY-MM-DDTHH:mm:ss');
+      const newEvent = { title, start: formattedStart, end_time: formattedEnd, description: '', userId: 1 }; // Supondo userId = 1
+
+      try {
+        return console.log(newEvent)
+        const response = await APIS.insertDates({ newEvent });
+        setEvents([...events, response.data]);
+      } catch (error) {
+        console.error('Erro ao criar evento:', error);
+        alert('Erro ao criar evento. Tente novamente.');
+      } 
     }
   };
 
@@ -42,7 +96,17 @@ const Calendario = () => {
         endAccessor="end"
         selectable
         onSelectSlot={handleSelectSlot}
-        style={{ height: '80vh' }}
+        messages={messages} // Adicionar as mensagens traduzidas
+        style={{
+          height: '100vh',
+          backgroundColor: '#f8f9fa', 
+          padding: '20px',
+          borderRadius: '10px', 
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
+          fontFamily: 'Arial, sans-serif', 
+          textAlign: 'center!important',
+          color: '#333'
+        }}
       />
     </div>
   );
