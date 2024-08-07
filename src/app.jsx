@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks';
+import { h } from 'preact';
 import { Route, Routes, HashRouter } from 'react-router-dom';
 import Cadastro from './pages/cadastro/Cadastro';
 import Barber from './pages/Barbearia/homeBarber/Barber';
