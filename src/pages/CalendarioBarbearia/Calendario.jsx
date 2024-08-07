@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'moment/locale/pt-br'; // Importar o locale do moment para português
 import 'react-big-calendar/lib/css/react-big-calendar.css'; // Importar os estilos do calendário
 import APIS from '../../api/Calendar/Calendar'; 
-import { useEffect } from 'preact/hooks';
+
 
 // Configurar o moment para usar o locale em português
 moment.locale('pt-br');

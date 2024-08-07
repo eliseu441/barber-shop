@@ -1,8 +1,6 @@
-
-import { useState } from 'preact/hooks';
+import { useState } from 'react';
 import Carousel from './carousel';
 import ServiceList from './serviceList';
-
 
 const Barber = () => {
   const [topServices] = useState([
@@ -19,21 +17,13 @@ const Barber = () => {
     { id: 4, name: 'Descoloração capilar', description: 'Preço para descoloração completa', price: 'R$ 40', details: 'Duração de 30 minutos.', genericDetails: 'Procedimento seguro e eficaz.' },
     { id: 5, name: 'Hidratação', description: 'Tratamento completo para os cabelos', price: 'R$ 100', details: 'Inclui hidratação e reconstrução.', genericDetails: 'Tratamento profundo para cabelos saudáveis.' },
     { id: 6, name: 'Hiadrata ção', description: 'Tratamento caompleto para os cabelos', price: 'R$ 10a0', details: 'Incalui hidratação e reconstrução.', genericDetails: 'Tratamento profundo para cabelos saudáveis.' },
-]);
+  ]);
 
   return (
     <div className="pagina-servicos col-sm-12">
       <Carousel topServices={topServices} />
       <ServiceList services={services} />
-      <a
-        href="/#/calendario"
-        className="btn btn-warning position-fixed scheduleButton">
-      <button 
-        className="btn btn-warning position-fixed scheduleButton" 
-      >
-        Agende Agora
-      </button>
-      </a>
+      <a href="/#/calendario">Agendar</a>
     </div>
   );
 };
