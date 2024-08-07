@@ -4,14 +4,13 @@ import moment from 'moment';
 import 'moment/locale/pt-br'; // Importar o locale do moment para português
 import 'react-big-calendar/lib/css/react-big-calendar.css'; // Importar os estilos do calendário
 import APIS from '../../api/Calendar/Calendar'; 
+import Preloader from "../../layout/preLoader/Preloader.jsx";
 
 
-// Configurar o moment para usar o locale em português
 moment.locale('pt-br');
 
 const localizer = momentLocalizer(moment);
 
-// Definir as traduções para o calendário
 const messages = {
   allDay: 'Dia inteiro',
   previous: 'Anterior',
@@ -31,6 +30,7 @@ const messages = {
 const Calendario = () => {
   const [events, setEvents] = useState([]);
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   async function getDates() {
     try {
@@ -47,7 +47,11 @@ const Calendario = () => {
     }
   }
   useEffect(() => {
-    getDates();
+    setTimeout(() => {
+      setIsLoading(false);
+  }, 2000);
+  getDates();
+    
   },[]);
   const handleSelectSlot = async ({ start, end }) => {
     const today = new Date();
@@ -90,8 +94,8 @@ const Calendario = () => {
   };
 
   return (
-    <div className="pagina-calendario col-sm-12">
-      <Calendar
+    <div className="pagina-calendario col-sm-12 d-flex justify-content-center align-items-center">
+       {isLoading ? <Preloader /> :<Calendar
         localizer={localizer}
         events={data}
         startAccessor="start"
@@ -100,7 +104,8 @@ const Calendario = () => {
         onSelectSlot={handleSelectSlot}
         messages={messages} // Adicionar as mensagens traduzidas
         style={{
-          height: '100vh',
+          height: '95vh',
+          width: '95%',
           backgroundColor: 'rgb(234, 245, 255)', 
           padding: '20px',
           borderRadius: '10px', 
@@ -109,7 +114,8 @@ const Calendario = () => {
           textAlign: 'center!important',
           color: 'black'
         }}
-      />
+      />}
+      
     </div>
   );
 };
