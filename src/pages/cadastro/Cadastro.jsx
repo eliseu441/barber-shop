@@ -17,7 +17,7 @@ function Cadastro() {
     };
 
     return (
-        
+        <>
         <div className="pagina-cadastro d-flex justify-content-center align-items-center">
             
             <div className="card-cadastro ms-3 me-3 col-sm-6">
@@ -99,6 +99,7 @@ function Cadastro() {
                 </form>
             </div>
         </div>
+        </>
     );
 }
 
