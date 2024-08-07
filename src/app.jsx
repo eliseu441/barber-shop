@@ -10,6 +10,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 function App() {
   return (
+    <>
     <HashRouter>
       <Routes>
         <Route path="/" element={<Cadastro />} />
@@ -17,6 +18,7 @@ function App() {
         <Route path="/calendario" element={<Calendario />} />
       </Routes>
     </HashRouter>
+    </>
   );
 }
 
