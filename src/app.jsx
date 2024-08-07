@@ -3,7 +3,6 @@ import { Route, Routes, HashRouter } from 'react-router-dom';
 import Cadastro from './pages/cadastro/Cadastro';
 import Barber from './pages/Barbearia/homeBarber/Barber';
 import Calendario from './pages/CalendarioBarbearia/Calendario';
-import './scss/styles.scss';
 
 function App() {
   return (
