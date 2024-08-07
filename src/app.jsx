@@ -6,10 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Barber from './pages/Barbearia/homeBarber/Barber';
 import Calendario from './pages/CalendarioBarbearia/Calendario';
-
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 function App() {
