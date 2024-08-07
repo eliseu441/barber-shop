@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
-function App() {
+const App = () => {
   return (
     <div className="container">
       <h1>Hello, Preact!</h1>
