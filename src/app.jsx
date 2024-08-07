@@ -10,13 +10,9 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 function App() {
   return (
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<Cadastro />} />
-        <Route path="/barber" element={<Barber />} />
-        <Route path="/calendario" element={<Calendario />} />
-      </Routes>
-    </HashRouter>
+    <div className="container">
+      <h1>Hello, Preact!</h1>
+    </div>
   );
 }
 
