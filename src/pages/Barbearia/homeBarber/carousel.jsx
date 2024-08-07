@@ -1,4 +1,3 @@
-import { h } from 'preact';
 
 const Carousel = ({ topServices }) => (
   <div className="slider-container text-center">

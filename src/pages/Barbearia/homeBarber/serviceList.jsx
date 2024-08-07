@@ -1,4 +1,4 @@
-import { h } from 'preact';
+
 import ServiceCard from './serviceCard';
 
 const ServiceList = ({ services }) => (
