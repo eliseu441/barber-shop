@@ -8,15 +8,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
-const App = () =>{
+function App() {
   return (
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<Cadastro />} />
-        <Route path="/barber" element={<Barber />} />
-        <Route path="/calendario" element={<Calendario />} />
-      </Routes>
-    </HashRouter>
+    <div>teste</div>
   );
 }
 
