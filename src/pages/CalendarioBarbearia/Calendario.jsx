@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
-import 'moment/locale/pt-br'; // Importar o locale do moment para português
-import 'react-big-calendar/lib/css/react-big-calendar.css'; // Importar os estilos do calendário
+import 'moment/locale/pt-br'; 
+import 'react-big-calendar/lib/css/react-big-calendar.css'; 
 import APIS from '../../api/Calendar/Calendar'; 
 import Preloader from "../../layout/preLoader/Preloader.jsx";
 
@@ -11,27 +11,18 @@ moment.locale('pt-br');
 
 const localizer = momentLocalizer(moment);
 
-const messages = {
-  allDay: 'Dia inteiro',
-  previous: 'Anterior',
-  next: 'Próximo',
-  today: 'Hoje',
-  month: 'Mês',
-  week: 'Semana',
-  day: 'Dia',
-  agenda: 'Agenda',
-  date: 'Data',
-  time: 'Hora',
-  event: 'Evento',
-  noEventsInRange: 'Não há eventos neste intervalo.',
-  showMore: total => `+ Ver mais (${total})`
-};
+
 
 const Calendario = () => {
   const [events, setEvents] = useState([]);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+  }, 2000);
+  getDates();
+  },[]);
   async function getDates() {
     try {
       const response = await APIS.allDates()
@@ -46,13 +37,22 @@ const Calendario = () => {
       throw err;
     }
   }
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-  }, 2000);
-  getDates();
-    
-  },[]);
+  const messages = {
+    allDay: 'Dia inteiro',
+    previous: 'Anterior',
+    next: 'Próximo',
+    today: 'Hoje',
+    month: 'Mês',
+    week: 'Semana',
+    day: 'Dia',
+    agenda: 'Agenda',
+    date: 'Data',
+    time: 'Hora',
+    event: 'Evento',
+    noEventsInRange: 'Não há eventos neste intervalo.',
+    showMore: total => `+ Ver mais (${total})`
+  };
+
   const handleSelectSlot = async ({ start, end }) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Zerar horas para comparar apenas a data
@@ -62,7 +62,6 @@ const Calendario = () => {
       return;
     }
 
-    // Verificar se o evento começa e termina no mesmo dia
     if (start.toDateString() !== end.toDateString()) {
       alert('O evento deve começar e terminar no mesmo dia.');
       return;

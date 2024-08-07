@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Cadastro />} />
         <Route path="/barber" element={<Barber />} />
-        <Route path="/calendario" element={<Calendario />} />
+        <Route path="/calendar" element={<Calendario />} />
       </Routes>
     </HashRouter>
   );
