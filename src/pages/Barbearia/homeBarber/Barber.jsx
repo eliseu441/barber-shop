@@ -1,8 +1,7 @@
-import { h } from 'preact';
+
 import { useState } from 'preact/hooks';
 import Carousel from './carousel';
 import ServiceList from './serviceList';
-import ServiceCard from './serviceCard';
 
 
 const Barber = () => {
