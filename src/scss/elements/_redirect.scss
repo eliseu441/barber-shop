@@ -1,128 +1,133 @@
 .selection {
+    color: white;
     display: flex;
     width: 100vw;
     margin: 0;
     height: 100vh;
-    
 
-.half-div {
-    width: 50%;
-    padding: 0px;
-    transition: width 0.3s ease-in-out;
-    overflow-y: auto; /* Adiciona rolagem se o conteúdo for maior que a altura da tela */
-}
 
-.half-div:hover {
-    width: 70%;
-}
-
-.left-div {
-    background-color: lightblue;
-    background-image: url('/images/barbearia/bg_redirect1.avif');
-    background-size: cover;
-}
-
-.right-div {
-    background-color: lightcoral;
-    background-image: url('/images/barbearia/bg_redirect2.avif');
-    background-size: cover;
-}
-
-h1, h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    margin-bottom: 5px;
-}
-
-p {
-    margin-bottom: 10px;
-}
-
-blockquote {
-    font-style: italic;
-    margin: 10px 0;
-    padding-left: 10px;
-    border-left: 3px solid #007bff;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-.half-background {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 10px;
-    margin: 10px;
-    margin-top: 10px;
-    text-align: center;
-}
-
-.fixed-button {
-    background-color: black;
-    position: absolute;
-    top: 20px;
-    left: 49%;
-    transform: translateX(-50%);
-}
-}
-.slick-dots {
-    bottom: 100% !important;
-
-    li button::before,
-    li button::before {
-        transition: all 1s;
-        background-color: black;
-        opacity: 1 !important;
-        border: 2px solid rgb(255, 0, 0);
-        border-radius: 50%;
-        display: inline-block;
-        height: 12px;
-        width: 15px;
-
+    .half-div {
+        width: 50%;
+        padding: 0px;
+        transition: width 0.7s ease-in-out;
+        overflow-y: auto;
+        /* Adiciona rolagem se o conteúdo for maior que a altura da tela */
     }
-
-    li.slick-active button::before {
-        opacity: 1 !important;
-        background-color: #fff;
-    }
-}
-.imgSlider {
-    background-color: rgb(0, 0, 0, 0);
-    width: 30vw ;
-    max-height: 300px;
-    margin-top: -20px;
-}
-
-@media (max-width: 768px) {
-    .slider{
-        display: none!important;
-    }
-    .hideMobile{
+    .half-div p{
         display: none;
     }
-}
-.slider{
-    max-height: 250px;
-    overflow: hidden;
-    button{
-        background-color: rgb(0, 0, 0, 0)!important;
+    .half-div:hover {
+        width: 150%;
+        p, .button-green, .button-red {
+            display: flex!important;
+        }
+    }
+
+    .left-div,
+    .right-div {
+        background-size: cover;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .left-div::before,
+    .right-div::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0);
+        transition: all 0.3s ease;
+        z-index: 1;
+        border: 3px solid transparent;
+    }
+
+        .left-div:hover::before,
+    .right-div:hover::before {
+        border: 2px solid transparent;
+        background: rgba(0, 0, 0, 0.8);
+        /* Ajuste a opacidade conforme necessário */
+    }
+    .left-div:hover::before{
+        border-image: linear-gradient(to right, rgb(255, 235, 123), rgb(255, 136, 0)) 1;
+    }
+    .right-div:hover::before{
+        border-image: linear-gradient(to right, rgb(255, 123, 123), rgb(255, 0, 0)) 1;
+    }
+
+
+    .left-div {
+        background-image: url('/images/barbearia/bg_redirect1.avif');
+    }
+
+    .right-div {
+        background-image: url('/images/barbearia/bg_redirect2.avif');
+    }
+
+    .left-div>*,
+    .right-div>* {
+        position: relative;
+        z-index: 2;
+    }
+    .left-div, .right-div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Ajuste a altura conforme necessário */
+    }
+    
+    .left-div h1, .right-div h1, .left-div p, .right-div p {
+        text-align: center;
+        bottom:30%;
+    }
+    h1,
+    h2 {
+        
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 5px;
+    }
+
+    p {
+        margin-bottom: 10px;
+    }
+
+    blockquote {
+        font-style: italic;
+        margin: 10px 0;
+        padding-left: 10px;
+        border-left: 3px solid #007bff;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .half-background {
+        color: white;
+        padding: 10px;
+        margin: 10px;
+        margin-top: 10px;
+        text-align: center;
     }
 }
