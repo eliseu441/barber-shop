@@ -1,0 +1,78 @@
+.budgetPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 100dvh;
+    background-color: #252525;
+    color: white;
+    background: rgb(89, 0, 0);
+    background: radial-gradient(circle, rgba(89, 0, 0, 1) 0%, rgba(37, 37, 37, 1) 50%);
+    background-position-y: -15vh;
+
+    h1 {
+        text-align: center;
+        font-size: 2rem;
+        margin-top: 3rem;
+        margin-bottom: 4rem;
+        font-family: "Teko", sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
+    }
+
+    .slick-dots {
+
+        li button::before,
+        li button::before {
+            transition: all 1s;
+            background-color: black;
+            opacity: 1 !important;
+            border: 2px solid rgb(255, 0, 0);
+            border-radius: 50%;
+            display: inline-block;
+            height: 20px;
+            width: 20px;
+
+        }
+
+        li.slick-active button::before {
+            opacity: 1 !important;
+            background-color: #fff;
+        }
+    }
+
+    .imgSlider {
+        background: rgb(40, 40, 40);
+        background: linear-gradient(75deg, rgb(63, 63, 63) 0%, rgb(192, 192, 192) 100%);
+        border-radius: 10px;
+        border: 2px solid rgb(116, 0, 0);
+        padding: 20px;
+        width: 200px;
+    }
+
+    .slider {
+        max-height: 250px;
+    }
+}
+
+.cardBudget {
+    width: 180px;
+    height: 100px;
+    font-family: "Teko", sans-serif;
+    font-optical-sizing: auto;
+
+
+    font-style: normal;
+    text-align: center;
+
+    border-radius: 10px;
+    border: 2px solid rgb(31, 31, 31, 0.2);
+
+    background: rgb(40, 40, 40);
+    background: linear-gradient(75deg, rgb(24, 24, 24) 0%, rgb(14, 14, 14) 100%);
+
+    h2 {
+        font-size: 1.4rem !important;
+        letter-spacing: 1px;
+    }
+
+}
