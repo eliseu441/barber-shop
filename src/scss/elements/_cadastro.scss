@@ -1,6 +1,6 @@
 .pagina-cadastro {
     color: white !important;
-    height: 100dvh;
+    height: 103dvh;
     background-color: #000000;
     background-image: url('/images/bg_cadastro.jpeg');
     background-size: cover;
@@ -12,7 +12,7 @@
 
     .card-cadastro {
 
-        max-width: 920px;
+        max-width: 870px;
         background-color: rgba(10, 10, 10, 0.8);
         backdrop-filter: blur(1px);
         border: 2px solid rgb(87, 87, 87);
@@ -339,11 +339,12 @@
     border-radius: 6px;
     border: 1px solid rgb(83, 83, 83);
     border-left: 5px solid rgb(83, 83, 83);
+    height: 35px;
     &:hover{
       background-color: rgb(230, 253, 252);
       transition: all 0.3s;
     }
     &:focus,&:active{
-        border-color: black;
+        border-color: rgb(148, 0, 0);
     }
   }

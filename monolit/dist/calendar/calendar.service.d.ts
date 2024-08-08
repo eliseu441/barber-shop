@@ -1,5 +1,6 @@
 import { Repository } from 'typeorm';
 import { CreateCalendarDto } from './dto/create-calendar.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 import { User, Event } from './entities/calendar.entity';
 export declare class CalendarService {
     private readonly eventRepository;
@@ -14,4 +15,5 @@ export declare class CalendarService {
         user_id: number;
     }[]>;
     viewCalendar(id: number): Promise<Event>;
+    createUser(createUserDto: CreateUserDto): Promise<User>;
 }

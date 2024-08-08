@@ -1,5 +1,6 @@
 import { CalendarService } from './calendar.service';
 import { CreateCalendarDto } from './dto/create-calendar.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 export declare class CalendarController {
     private readonly calendarService;
     constructor(calendarService: CalendarService);
@@ -11,4 +12,5 @@ export declare class CalendarController {
         description: string;
         user_id: number;
     }[]>;
+    createUser(createUserDto: CreateUserDto): Promise<import("./entities/calendar.entity").User>;
 }

@@ -6,9 +6,6 @@ class calendarEdit {
             const response = await API.get(`/allCalendar`);
 
                 return response;
-            
-
-            return [];
 
         } catch (err) {
             throw err;
@@ -21,9 +18,18 @@ class calendarEdit {
             const response = await API.post(`/createSchedule`, params);
 
                 return response;
-            
 
-            return [];
+        } catch (err) {
+            throw err;
+        }
+
+    };
+    insertUsers = async (params) => {
+
+        try {
+            const response = await API.post(`/createUser`, params);
+
+                return response;
 
         } catch (err) {
             throw err;

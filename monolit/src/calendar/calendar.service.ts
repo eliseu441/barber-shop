@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCalendarDto } from './dto/create-calendar.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 import { User, Event } from './entities/calendar.entity';
 
 @Injectable()
@@ -42,7 +43,7 @@ export class CalendarService {
       createCalendarDto.viewer_id,
     ];
 
-    console.log('Inserting event with values:', values);
+    console.log(' values:', values);
 
     // Executa a consulta SQL
     const result = await this.eventRepository.query(query, values);
@@ -66,5 +67,16 @@ export class CalendarService {
   viewCalendar(id: number): Promise<Event> {
     return this.eventRepository.findOneBy({ id });
   }
+  async createUser(createUserDto: CreateUserDto): Promise<User> {
+    const { name, email, password, permission } = createUserDto;
 
+    const newUser = this.userRepository.create({
+      name,
+      email,
+      password,
+      permission,
+    });
+
+    return await this.userRepository.save(newUser);
+  }
 }

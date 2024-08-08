@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Preloader from "../../layout/preLoader/Preloader.jsx";
+import APIS from '../../api/Calendar/Calendar';
 
 const Cadastro = () => {
     const [inputParams, setInputParams] = useState({
@@ -9,17 +11,54 @@ const Cadastro = () => {
         senha: ''
     });
     const [isBlackBlockVisible, setIsBlackBlockVisible] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 2500);
+    }, []);
+
+    async function insertUser() {
+        try {
+            setIsLoading(true);
+            const insert = {
+                name: inputParams.nome,
+                email: inputParams.email,
+                password: inputParams.senha,
+                permission: 2
+            }
+            console.log('insert', insert);
+            const response = await APIS.insertUsers(insert);
+            if (response.status === 201) {
+                alert('Usuário cadastrado com sucesso!');
+            }
+            setIsLoading(false);
+        } catch (err) {
+            throw err;
+        }
+    }
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
         // Lógica de submissão do formulário
     };
 
-    const check = () => {
-        // Lógica de verificação
+    const check = (e, tipo) => {
+        if (tipo === 1) {
+            insertUser();
+        } else if (tipo === 2) {
+            console.log('loginParams', inputParams);
+        }
     };
 
     const toggleBlackBlock = () => {
+        setInputParams({
+            nome: '',
+            sobrenome: '',
+            email: '',
+            senha: ''
+        })
         setIsBlackBlockVisible(!isBlackBlockVisible);
     };
 
@@ -43,6 +82,7 @@ const Cadastro = () => {
 
     return (
         <>
+            {isLoading ? <Preloader /> : <></>}
             <div className=" pagina-cadastro d-flex flex-column justify-content-center align-items-center row">
                 <div class='col-12'>
                     <label class="switch-button" for="switch" >
@@ -67,32 +107,21 @@ const Cadastro = () => {
                                         <div className={`black-block ${!isBlackBlockVisible ? 'right-block' : ''}`}></div>
                                     </div>
                                     <form className="row formInputs" onSubmit={handleSubmit}>
-                                        
-                                        <div className="form-group mb-3 col-xl-6">
-                                            <label htmlFor="nome" className="inputText">Nome:</label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                id="nome"
-                                                name="nome"
-                                                value={inputParams.nome}
-                                                onChange={(e) => setInputParams({ ...inputParams, nome: e.target.value })}
-                                                required
-                                            />
+                                        <div class='d-flex justify-content-center'>
+                                            <div className="form-group mb-3 col-xl-9">
+                                                <label htmlFor="nome" className="inputText">Nome:</label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="nome"
+                                                    name="nome"
+                                                    value={inputParams.nome}
+                                                    onChange={(e) => setInputParams({ ...inputParams, nome: e.target.value })}
+                                                    required
+                                                />
+                                            </div>
                                         </div>
-                                        <div className="form-group mb-3 col-xl-6">
-                                            <label htmlFor="sobrenome" className="inputText">Sobrenome:</label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                id="sobrenome"
-                                                name="sobrenome"
-                                                value={inputParams.sobrenome}
-                                                onChange={(e) => setInputParams({ ...inputParams, sobrenome: e.target.value })}
-                                                required
-                                            />
-                                        </div>
-                                        <div className="d-flex justify-content-center col-12">
+                                        <div class='d-flex justify-content-center'>
                                             <div className="form-group mb-3 col-xl-8">
                                                 <label htmlFor="email" className="inputText">Email:</label>
                                                 <input
@@ -106,7 +135,7 @@ const Cadastro = () => {
                                                 />
                                             </div>
                                         </div>
-                                        <div className="d-flex justify-content-center col-12">
+                                        <div class='d-flex justify-content-center'>
                                             <div className="form-group mb-3 col-xl-6">
                                                 <label htmlFor="senha" className="inputText">Senha:</label>
                                                 <input
@@ -122,9 +151,10 @@ const Cadastro = () => {
                                         </div>
                                         <div className="col-12 d-flex justify-content-center">
                                             <div className="col-sm-4 button-green">
-                                                <Link to="barber">
-                                                    <button onClick={e => check()}> CADASTRAR
+                                            <Link to="/redirect">
+                                                    <button onClick={e => check(inputParams, 1)}> CADASTRAR
                                                     </button>
+                                                    
                                                 </Link>
                                             </div>
                                         </div>
@@ -139,7 +169,6 @@ const Cadastro = () => {
                                                 <input
                                                     type="email"
                                                     className="form-control"
-                                                    id="email"
                                                     name="email"
                                                     value={inputParams.email}
                                                     onChange={(e) => setInputParams({ ...inputParams, email: e.target.value })}
@@ -153,7 +182,6 @@ const Cadastro = () => {
                                                 <input
                                                     type="password"
                                                     className="form-control"
-                                                    id="senha"
                                                     name="senha"
                                                     value={inputParams.senha}
                                                     onChange={(e) => setInputParams({ ...inputParams, senha: e.target.value })}
@@ -163,10 +191,11 @@ const Cadastro = () => {
                                         </div>
                                         <div className="col-12 d-flex justify-content-center">
                                             <div className="col-sm-4 button-red">
-                                                <Link to="barber">
-                                                    <button onClick={e => check()}> LOGIN
-                                                    </button>
+                                            <Link to="/redirect">
+                                                <button onClick={e => check(inputParams, 2)}> LOGIN
+                                                </button>
                                                 </Link>
+             
                                             </div>
                                         </div>
                                     </form>

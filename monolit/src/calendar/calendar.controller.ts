@@ -13,6 +13,7 @@ import {
 import { CalendarService } from './calendar.service';
 import { CreateCalendarDto } from './dto/create-calendar.dto';
 import { UpdateCalendarDto } from './dto/update-calendar.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Controller('api')
@@ -44,5 +45,10 @@ export class CalendarController {
   async getAllCalendar() {
     const events = await this.calendarService.findAllCalendar();
     return events;
+  }
+  @Post('/createUser')
+  async createUser(@Body() createUserDto: CreateUserDto) {
+    const user = await this.calendarService.createUser(createUserDto);
+    return user;
   }
 }

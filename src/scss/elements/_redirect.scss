@@ -1,0 +1,128 @@
+.selection {
+    display: flex;
+    width: 100vw;
+    margin: 0;
+    height: 100vh;
+    
+
+.half-div {
+    width: 50%;
+    padding: 0px;
+    transition: width 0.3s ease-in-out;
+    overflow-y: auto; /* Adiciona rolagem se o conteúdo for maior que a altura da tela */
+}
+
+.half-div:hover {
+    width: 70%;
+}
+
+.left-div {
+    background-color: lightblue;
+    background-image: url('/images/barbearia/bg_redirect1.avif');
+    background-size: cover;
+}
+
+.right-div {
+    background-color: lightcoral;
+    background-image: url('/images/barbearia/bg_redirect2.avif');
+    background-size: cover;
+}
+
+h1, h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+blockquote {
+    font-style: italic;
+    margin: 10px 0;
+    padding-left: 10px;
+    border-left: 3px solid #007bff;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+.half-background {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    margin: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.fixed-button {
+    background-color: black;
+    position: absolute;
+    top: 20px;
+    left: 49%;
+    transform: translateX(-50%);
+}
+}
+.slick-dots {
+    bottom: 100% !important;
+
+    li button::before,
+    li button::before {
+        transition: all 1s;
+        background-color: black;
+        opacity: 1 !important;
+        border: 2px solid rgb(255, 0, 0);
+        border-radius: 50%;
+        display: inline-block;
+        height: 12px;
+        width: 15px;
+
+    }
+
+    li.slick-active button::before {
+        opacity: 1 !important;
+        background-color: #fff;
+    }
+}
+.imgSlider {
+    background-color: rgb(0, 0, 0, 0);
+    width: 30vw ;
+    max-height: 300px;
+    margin-top: -20px;
+}
+
+@media (max-width: 768px) {
+    .slider{
+        display: none!important;
+    }
+    .hideMobile{
+        display: none;
+    }
+}
+.slider{
+    max-height: 250px;
+    overflow: hidden;
+    button{
+        background-color: rgb(0, 0, 0, 0)!important;
+    }
+}

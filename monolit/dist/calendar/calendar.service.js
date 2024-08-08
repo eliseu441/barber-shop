@@ -42,7 +42,7 @@ let CalendarService = class CalendarService {
             createCalendarDto.user_id,
             createCalendarDto.viewer_id,
         ];
-        console.log('Inserting event with values:', values);
+        console.log(' values:', values);
         const result = await this.eventRepository.query(query, values);
         return result[0];
     }
@@ -59,6 +59,16 @@ let CalendarService = class CalendarService {
     }
     viewCalendar(id) {
         return this.eventRepository.findOneBy({ id });
+    }
+    async createUser(createUserDto) {
+        const { name, email, password, permission } = createUserDto;
+        const newUser = this.userRepository.create({
+            name,
+            email,
+            password,
+            permission,
+        });
+        return await this.userRepository.save(newUser);
     }
 };
 exports.CalendarService = CalendarService;
