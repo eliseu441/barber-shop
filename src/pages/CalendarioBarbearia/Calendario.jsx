@@ -14,6 +14,14 @@ const Calendario = () => {
   const [events, setEvents] = useState([]);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+    getDates();
+  }, []);
+
   document.addEventListener('DOMContentLoaded', () => {
     const monthTranslations = {
       'January': 'janeiro',
@@ -30,24 +38,29 @@ const Calendario = () => {
       'December': 'dezembro'
     };
   
+    const translateMonth = () => {
+      const toolbarLabel = document.querySelector('.rbc-toolbar-label');
+      if (toolbarLabel) {
+        const [month, year] = toolbarLabel.textContent.split(' ');
+        const translatedMonth = monthTranslations[month];
+        if (translatedMonth) {
+          toolbarLabel.setAttribute('data-translated-month', `${translatedMonth} ${year}`);
+        }
+      }
+    };
+  
+    // Executa a tradução inicial
+    translateMonth();
+  
+    // Cria um MutationObserver para observar mudanças no .rbc-toolbar-label
     const toolbarLabel = document.querySelector('.rbc-toolbar-label');
     if (toolbarLabel) {
-      const [month, year] = toolbarLabel.textContent.split(' ');
-      const translatedMonth = monthTranslations[month];
-      if (translatedMonth) {
-        toolbarLabel.textContent = `${translatedMonth} ${year}`;
-      }
+      const observer = new MutationObserver(translateMonth);
+      observer.observe(toolbarLabel, { childList: true, subtree: true, characterData: true });
     }
   });
 
   
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    getDates();
-  }, []);
-
   async function getDates() {
     try {
       const response = await APIS.allDates();

@@ -11,7 +11,7 @@
   background: linear-gradient(75deg, rgb(59, 59, 59) 0%, rgb(14, 14, 14) 100%);
 
   .rbc-today {
-    background-color: white;
+    background-color: rgb(255, 233, 192);
   }
   .rbc-day-bg {
     border-radius: 5px;
@@ -95,12 +95,24 @@
 .rbc-header span::before {
   visibility: visible;
   position: absolute;
-  left: 0;
-  top: 0;
-  /* Adicione aqui os estilos desejados para o texto */
-  font-family: 'Arial', sans-serif; /* Exemplo: alterar a fonte */
-  font-size: 14px; /* Exemplo: alterar o tamanho da fonte */
-  color: #333; /* Exemplo: alterar a cor do texto */
 }
 
 
+.rbc-toolbar-label {
+  visibility: hidden; /* Oculta o conteúdo original */
+  position: relative; /* Necessário para posicionar o ::after */
+}
+
+.rbc-toolbar-label::after {
+  content: attr(data-translated-month);
+  visibility: visible; /* Garante que o conteúdo do ::after seja visível */
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  width: 100%;
+  letter-spacing: 1px;
+  white-space: nowrap; 
+}
