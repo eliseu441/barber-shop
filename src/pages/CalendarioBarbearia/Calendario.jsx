@@ -14,14 +14,6 @@ const Calendario = () => {
   const [events, setEvents] = useState([]);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    getDates();
-    
   document.addEventListener('DOMContentLoaded', () => {
     const monthTranslations = {
       'January': 'janeiro',
@@ -47,6 +39,13 @@ const Calendario = () => {
       }
     }
   });
+
+  
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+    getDates();
   }, []);
 
   async function getDates() {
