@@ -7,8 +7,9 @@ function CustomPaging(params) {
         dots: true,
         dotsClass: "slick-dots slick-thumb",
         infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 4,
         nextArrow: <div className="slick-next">→</div>,
         prevArrow: <div className="slick-prev">←</div>,
     };
@@ -21,25 +22,41 @@ function CustomPaging(params) {
 
     return (
         <Slider {...settings}>
-            <div className='d-flex justify-content-center row'>
+            <div className='d-flex justify-content-center row p-2'>
                 <img src={`/img/${projeto}/${projeto}1.png`} className="imgSlider" />
-                <p className="text-center">Aparar barba</p>
-                <button className="btn btn-primary" style={{ width: '200px' }} onClick={() => handleButtonClick('barba R$:30')}>+adicionar item</button>
+                <p className="title-service text-center text-nowrap overflow-hidden">Aparar barba</p>
+                <div className="button-red d-flex justify-content-center">
+                    <button className="btn-center" onClick={() => handleButtonClick('barba R$:30')}>
+                        R$30
+                    </button>
+                </div>
             </div>
-            <div className='d-flex justify-content-center row'>
+            <div className='d-flex justify-content-center row p-2'>
                 <img src={`/img/${projeto}/${projeto}2.png`} className="imgSlider" />
-                <p className="text-center">Corte de cabelo</p>
-                <button className="btn btn-primary" style={{ width: '200px' }} onClick={() => handleButtonClick('cabelo R$:50')}>+adicionar item</button>
+                <p className="title-service text-center text-nowrap overflow-hidden">Corte simples</p>
+                <div className="button-red d-flex justify-content-center">
+                    <button className="btn-center" onClick={() => handleButtonClick('cabelo R$:50')}>
+                        R$50
+                    </button>
+                </div>
             </div>
-            <div className='d-flex justify-content-center row'>
+            <div className='d-flex justify-content-center row p-2'>
                 <img src={`/img/${projeto}/${projeto}3.png`} className="imgSlider" />
-                <p className="text-center">Descoloração Capilar</p>
-                <button className="btn btn-primary" style={{ width: '200px' }} onClick={() => handleButtonClick('descoloracao R$:70')}>+adicionar item</button>
+                <p className="title-service text-center text-nowrap overflow-hidden">Descoloração Capilar</p>
+                <div className="button-red d-flex justify-content-center">
+                    <button className="btn-center" onClick={() => handleButtonClick('descoloracao R$:70')}>
+                        R$70
+                    </button>
+                </div>
             </div>
-            <div className='d-flex justify-content-center row'>
+            <div className='d-flex justify-content-center row p-2'>
                 <img src={`/img/${projeto}/${projeto}4.png`} className="imgSlider" />
-                <p className="text-center">Corte a tesoura</p>
-                <button className="btn btn-primary" style={{ width: '200px' }} onClick={() => handleButtonClick('tesoura R$:40')}>+adicionar item</button>
+                <p className="title-service text-center text-nowrap overflow-hidden">Corte a tesoura</p>
+                <div className="button-red d-flex justify-content-center">
+                    <button className="btn-center" onClick={() => handleButtonClick('tesoura R$:40')}>
+                        R$40
+                    </button>
+                </div>
             </div>
         </Slider>
     );

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Carousel from './carousel';
 import ServiceList from './serviceList';
 
@@ -23,7 +24,14 @@ const Barber = () => {
     <div className="pagina-servicos col-sm-12">
       <Carousel topServices={topServices} />
       <ServiceList services={services} />
-      <a href="/#/calendario">Agendar</a>
+      <div className="fixed-buttons">
+        <Link to="/calendar">
+          <button className="btn-agendar">Agendar Corte</button>
+        </Link>
+        <Link to="/budget">
+          <button className="btn-orcamento">Orçamento online</button>
+        </Link>
+      </div>
     </div>
   );
 };

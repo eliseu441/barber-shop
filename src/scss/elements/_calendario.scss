@@ -1,12 +1,106 @@
-
-.rbc-button-link{
+.rbc-button-link {
   width: 100%;
 }
-.rbc-event-content{
+.rbc-event-content {
   font-size: 1rem;
 }
-.pagina-calendario{
+.pagina-calendario {
   height: 100dvh;
   width: 100vw;
-  background-color: rgb(24, 57, 134);
+  background: rgb(40, 40, 40);
+  background: linear-gradient(75deg, rgb(59, 59, 59) 0%, rgb(14, 14, 14) 100%);
+
+  .rbc-today {
+    background-color: white;
+  }
+  .rbc-day-bg {
+    border-radius: 5px;
+  }
+  .rbc-date-cell {
+    padding: 2px;
+  }
+  .columnheader {
+   
+    font-family: 'Roboto', sans-serif; /* Exemplo: alterar a fonte */
+    font-size: 14px; /* Exemplo: alterar o tamanho da fonte */
+    color: #333; /* Exemplo: alterar a cor do texto */
+    background-color: #333!important; /* Exemplo: alterar a cor de fundo */
+    text-transform: capitalize; /* Exemplo: transformar o texto para capitalizado */
+  }
+  .rbc-button-link {
+    border-radius: 3px;
+    color: rgb(48, 48, 48);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-bottom: 2px solid rgb(61, 145, 255);
+    background-color: rgb(191, 219, 255);
+  }
+  .rbc-time-header .rbc-button-link {
+    color: rgb(48, 48, 48);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-bottom: none;
+    background-color: white;
+  }
+  .rbc-btn-group button {
+    background-color: rgb(230, 241, 255);
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    border: 1px solid rgb(116, 116, 116);
+  }
+  .rbc-active {
+    background-color: rgb(178, 212, 255)!important;
+    border: 1px solid rgb(116, 116, 116);
+  }
+  .rbc-off-range-bg {
+    background-color: rgb(235, 235, 235);
+  }
 }
+.rbc-header span {
+  /* Oculta o conteúdo original */
+  visibility: hidden;
+  position: relative;
+}
+.rbc-header:nth-child(1) span::before {
+  content: 'Dom';
+}
+
+.rbc-header:nth-child(2) span::before {
+  content: 'Seg';
+}
+
+.rbc-header:nth-child(3) span::before {
+  content: 'Ter';
+}
+
+.rbc-header:nth-child(4) span::before {
+  content: 'Qua';
+}
+
+.rbc-header:nth-child(5) span::before {
+  content: 'Qui';
+}
+
+.rbc-header:nth-child(6) span::before {
+  content: 'Sex';
+}
+
+.rbc-header:nth-child(7) span::before {
+  content: 'Sáb';
+}
+
+.rbc-header span::before {
+  visibility: visible;
+  position: absolute;
+  left: 0;
+  top: 0;
+  /* Adicione aqui os estilos desejados para o texto */
+  font-family: 'Arial', sans-serif; /* Exemplo: alterar a fonte */
+  font-size: 14px; /* Exemplo: alterar o tamanho da fonte */
+  color: #333; /* Exemplo: alterar a cor do texto */
+}
+
+

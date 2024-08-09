@@ -30,7 +30,6 @@ const CarouselItem = ({ service, isActive }) => (
             <div className="col-sm-12 d-flex justify-content-center">
               <div className="carousel-caption col-sm-3">
                 <h3>{service.name}</h3>
-                <p>{service.description}</p>
                 <h3 className="price"><strong>{service.price}</strong></h3>
               </div>
             </div>
