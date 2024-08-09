@@ -14,6 +14,7 @@ const Calendario = () => {
   const [events, setEvents] = useState([]);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [canSchedule, setCanSchedule] = useState(false); // Variável de controle para agendamento
   
   useEffect(() => {
     setTimeout(() => {
@@ -77,6 +78,11 @@ const Calendario = () => {
   }
 
   const handleSelectSlot = async ({ start, end }) => {
+    if (!canSchedule) {
+      alert('Agendamento não permitido para esse usuario.');
+      return;
+    }
+
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
