@@ -3,6 +3,7 @@ import {
   Get,
   Post,
   Body,
+  Query,
   Patch,
   Param,
   Delete,
@@ -12,9 +13,8 @@ import {
 //import { AuthService } from '../auth/auth.service';
 import { CalendarService } from './calendar.service';
 import { CreateCalendarDto } from './dto/create-calendar.dto';
-import { UpdateCalendarDto } from './dto/update-calendar.dto';
 import { CreateUserDto } from './dto/create-user.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { FindUserDto } from './dto/find-user.dto';
 
 @Controller('api')
 export class CalendarController {
@@ -51,4 +51,12 @@ export class CalendarController {
     const user = await this.calendarService.createUser(createUserDto);
     return user;
   }
+
+  
+  @Get('/findUser')
+  async findUser(@Query() findUserDto: FindUserDto) {
+    const user = await this.calendarService.findUser(findUserDto);
+    return user;
+  }
+
 }

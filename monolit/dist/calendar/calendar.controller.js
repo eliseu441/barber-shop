@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const calendar_service_1 = require("./calendar.service");
 const create_calendar_dto_1 = require("./dto/create-calendar.dto");
 const create_user_dto_1 = require("./dto/create-user.dto");
+const find_user_dto_1 = require("./dto/find-user.dto");
 let CalendarController = class CalendarController {
     constructor(calendarService) {
         this.calendarService = calendarService;
@@ -41,6 +42,10 @@ let CalendarController = class CalendarController {
         const user = await this.calendarService.createUser(createUserDto);
         return user;
     }
+    async findUser(findUserDto) {
+        const user = await this.calendarService.findUser(findUserDto);
+        return user;
+    }
 };
 exports.CalendarController = CalendarController;
 __decorate([
@@ -63,6 +68,13 @@ __decorate([
     __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
     __metadata("design:returntype", Promise)
 ], CalendarController.prototype, "createUser", null);
+__decorate([
+    (0, common_1.Get)('/findUser'),
+    __param(0, (0, common_1.Query)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [find_user_dto_1.FindUserDto]),
+    __metadata("design:returntype", Promise)
+], CalendarController.prototype, "findUser", null);
 exports.CalendarController = CalendarController = __decorate([
     (0, common_1.Controller)('api'),
     __metadata("design:paramtypes", [calendar_service_1.CalendarService])

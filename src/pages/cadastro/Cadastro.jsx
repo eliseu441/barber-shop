@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Preloader from "../../layout/preLoader/Preloader.jsx";
 import APIS from '../../api/Calendar/Calendar';
+import { useNavigate } from 'react-router-dom';
 
 const Cadastro = () => {
+    const navigate = useNavigate();
     const [inputParams, setInputParams] = useState({
         nome: '',
         sobrenome: '',
@@ -27,12 +29,9 @@ const Cadastro = () => {
                 password: inputParams.senha,
                 permission: 2
             }
-            console.log('insert', insert);
             const response = await APIS.insertUsers(insert);
-            if (response.status === 201) {
-                alert('Usuário cadastrado com sucesso!');
-            }
-            setIsLoading(false);
+            await setIsLoading(false);
+            
         } catch (err) {
             throw err;
         }
@@ -41,14 +40,32 @@ const Cadastro = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Lógica de submissão do formulário
     };
 
-    const check = (e, tipo) => {
+    const check = async (e, tipo) => {
         if (tipo === 1) {
-            insertUser();
+            try {
+                let insert = await insertUser();
+                alert('Usuario cadastrado com sucesso!');
+                navigate('/redirect');
+                
+            } catch (error) {
+                setIsLoading(false);
+                alert('Erro ao inserir usuário!');
+                console.error('Erro ao inserir usuário:', error);
+            }
         } else if (tipo === 2) {
-            console.log('loginParams', inputParams);
+            try {
+                const response = await APIS.findUser({ email: inputParams.email, password: inputParams.senha });
+                if (response.data && Object.keys(response.data).length > 0) {
+                    alert('Usuário encontrado!');
+                    navigate('/redirect');
+                } else {
+                    alert('Login e/ou senha incorretos!');
+                }
+            } catch (error) {
+                console.error('Erro ao buscar usuário:', error);
+            }
         }
     };
 
@@ -62,23 +79,6 @@ const Cadastro = () => {
         setIsBlackBlockVisible(!isBlackBlockVisible);
     };
 
-
-    /*
-    
-                        <div class="mydict">
-                            <div>
-                                <label>
-                                    <input type="radio" name="radio" checked="" />
-                                    <span>Barbearia</span>
-                                </label>
-                                <label>
-                                    <input type="radio" name="radio" />
-                                    <span>Salão</span>
-                                </label>
-    
-                            </div>
-                        </div>
-    */
 
     return (
         <>
@@ -151,11 +151,8 @@ const Cadastro = () => {
                                         </div>
                                         <div className="col-12 d-flex justify-content-center">
                                             <div className="col-sm-4 button-green">
-                                            <Link to="/redirect">
                                                     <button onClick={e => check(inputParams, 1)}> CADASTRAR
                                                     </button>
-                                                    
-                                                </Link>
                                             </div>
                                         </div>
                                     </form>
@@ -191,10 +188,8 @@ const Cadastro = () => {
                                         </div>
                                         <div className="col-12 d-flex justify-content-center">
                                             <div className="col-sm-4 button-red">
-                                            <Link to="/redirect">
                                                 <button onClick={e => check(inputParams, 2)}> LOGIN
                                                 </button>
-                                                </Link>
              
                                             </div>
                                         </div>

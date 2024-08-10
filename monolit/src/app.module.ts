@@ -22,7 +22,7 @@ import { join } from 'path';
       database: 'calendar',
       logging: true,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: false,
+      synchronize: true,
       extra: {
         ssl: {
           rejectUnauthorized: false

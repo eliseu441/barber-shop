@@ -28,13 +28,21 @@ class calendarEdit {
 
         try {
             const response = await API.post(`/createUser`, params);
-
                 return response;
 
         } catch (err) {
             throw err;
         }
 
+    };
+    findUser = async (params) => {
+        try {
+            console.log(params)
+            const response = await API.get(`/findUser`, {params});
+            return response;
+        } catch (err) {
+            throw err;
+        }
     };
 }
 

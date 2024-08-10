@@ -42,7 +42,6 @@ let CalendarService = class CalendarService {
             createCalendarDto.user_id,
             createCalendarDto.viewer_id,
         ];
-        console.log(' values:', values);
         const result = await this.eventRepository.query(query, values);
         return result[0];
     }
@@ -62,6 +61,9 @@ let CalendarService = class CalendarService {
     }
     async createUser(createUserDto) {
         const { name, email, password, permission } = createUserDto;
+        if (!name || !email || !password) {
+            throw new common_1.BadRequestException('Name, email, and password cannot be empty');
+        }
         const newUser = this.userRepository.create({
             name,
             email,
@@ -69,6 +71,17 @@ let CalendarService = class CalendarService {
             permission,
         });
         return await this.userRepository.save(newUser);
+    }
+    async findUser(findUserDto) {
+        const { email, password } = findUserDto;
+        if (!email || !password) {
+            console.log('Email ou senha não fornecidos');
+            return undefined;
+        }
+        console.log(email, password);
+        const user = await this.userRepository.findOne({ where: { email, password } });
+        console.log(user);
+        return user;
     }
 };
 exports.CalendarService = CalendarService;
