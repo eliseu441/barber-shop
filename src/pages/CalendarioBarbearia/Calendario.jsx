@@ -5,23 +5,28 @@ import Preloader from "../../layout/preLoader/Preloader.jsx";
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'moment/locale/pt-br';
+import { useAppParams } from '../../layout/AppParams/AppParams.jsx';
 
 moment.locale('pt-br'); // Configura a localidade para português do Brasil
 
 const localizer = momentLocalizer(moment);
 
 const Calendario = () => {
+  const { usuario, perfil } = useAppParams();
   const [events, setEvents] = useState([]);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [canSchedule, setCanSchedule] = useState(false); // Variável de controle para agendamento
-  
+
   useEffect(() => {
+    console.log('Usuário:', usuario);
+    console.log('Perfil:', perfil);
+
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
     getDates();
-  }, []);
+  }, [usuario, perfil]);
 
   document.addEventListener('DOMContentLoaded', () => {
     const monthTranslations = {
@@ -38,7 +43,7 @@ const Calendario = () => {
       'November': 'novembro',
       'December': 'dezembro'
     };
-  
+
     const translateMonth = () => {
       const toolbarLabel = document.querySelector('.rbc-toolbar-label');
       if (toolbarLabel) {
@@ -49,10 +54,10 @@ const Calendario = () => {
         }
       }
     };
-  
+
     // Executa a tradução inicial
     translateMonth();
-  
+
     // Cria um MutationObserver para observar mudanças no .rbc-toolbar-label
     const toolbarLabel = document.querySelector('.rbc-toolbar-label');
     if (toolbarLabel) {
@@ -61,7 +66,6 @@ const Calendario = () => {
     }
   });
 
-  
   async function getDates() {
     try {
       const response = await APIS.allDates();
@@ -78,7 +82,7 @@ const Calendario = () => {
   }
 
   const handleSelectSlot = async ({ start, end }) => {
-    if (!canSchedule) {
+    if (perfil !== 1) {
       alert('Agendamento não permitido para esse usuario.');
       return;
     }
@@ -173,7 +177,6 @@ const Calendario = () => {
           color: 'black'
         }}
       />
-
     </div>
   );
 };
