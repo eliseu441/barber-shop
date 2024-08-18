@@ -7,16 +7,14 @@ import moment from 'moment';
 import 'moment/locale/pt-br';
 import { useAppParams } from '../../layout/AppParams/AppParams.jsx';
 
-moment.locale('pt-br'); // Configura a localidade para português do Brasil
+moment.locale('pt-br');
 
 const localizer = momentLocalizer(moment);
 
 const Calendario = () => {
   const { usuario, perfil } = useAppParams();
   const [events, setEvents] = useState([]);
-  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [canSchedule, setCanSchedule] = useState(false); // Variável de controle para agendamento
 
   useEffect(() => {
     console.log('Usuário:', usuario);
@@ -28,7 +26,7 @@ const Calendario = () => {
     getDates();
   }, [usuario, perfil]);
 
-  document.addEventListener('DOMContentLoaded', () => {
+  useEffect(() => {
     const monthTranslations = {
       'January': 'janeiro',
       'February': 'fevereiro',
@@ -55,48 +53,41 @@ const Calendario = () => {
       }
     };
 
-    // Executa a tradução inicial
     translateMonth();
 
-    // Cria um MutationObserver para observar mudanças no .rbc-toolbar-label
     const toolbarLabel = document.querySelector('.rbc-toolbar-label');
     if (toolbarLabel) {
       const observer = new MutationObserver(translateMonth);
-      observer.observe(toolbarLabel, { childList: true, subtree: true, characterData: true });
+      observer.observe(toolbarLabel, { childList: true });
     }
-  });
+  }, []);
 
-  async function getDates() {
+  const getDates = async () => {
     try {
       const response = await APIS.allDates();
       const formattedEvents = response.data.map(event => ({
-        id: event.id, // Supondo que o evento tenha um ID
+        id: event.id,
         title: event.title,
         start: new Date(event.start),
         end: new Date(event.end)
       }));
-      setData(formattedEvents);
+      setEvents(formattedEvents);
     } catch (err) {
-      throw err;
+      console.error('Erro ao buscar eventos:', err);
     }
-  }
+  };
 
   const handleSelectSlot = async ({ start, end }) => {
     if (perfil !== 1) {
-      alert('Agendamento não permitido para esse usuario.');
+      alert('Agendamento não permitido para este usuário.');
       return;
     }
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    if (start < today) {
-      alert('Não é possível agendar eventos em datas anteriores a hoje.');
-      return;
-    }
-
-    if (start.toDateString() !== end.toDateString()) {
-      alert('O evento deve começar e terminar no mesmo dia.');
+    if (start < today || start.toDateString() !== end.toDateString()) {
+      alert('O evento deve começar e terminar no mesmo dia, e não pode ser em datas anteriores a hoje.');
       return;
     }
 
@@ -155,15 +146,15 @@ const Calendario = () => {
 
   return (
     <div className="pagina-calendario col-sm-12 d-flex justify-content-center align-items-center">
-      {isLoading ? <Preloader /> : <></>}
+      {isLoading && <Preloader />}
       <Calendar
         selectable
         localizer={localizer}
-        events={data}
+        events={events}
         startAccessor="start"
         endAccessor="end"
         onSelectSlot={handleSelectSlot}
-        onSelectEvent={handleDeleteEvent} // Adicionando a função de deletar ao selecionar o evento
+        onSelectEvent={handleDeleteEvent}
         messages={messages}
         style={{
           height: '90vh',
@@ -173,7 +164,6 @@ const Calendario = () => {
           borderRadius: '5px',
           fontFamily: 'Roboto, sans-serif',
           fontSize: '1rem',
-          textAlign: 'center!important',
           color: 'black'
         }}
       />
