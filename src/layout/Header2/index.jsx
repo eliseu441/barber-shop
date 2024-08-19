@@ -149,11 +149,11 @@ export default function Header({ variant }) {
      <div className="cs-side_header_in">
        <div className="cs-side_header_shape" />
        <Link className="cs-site_branding" to="/">
-         <img src="/images/footer_logo.svg" alt="Logo" />
+         <img src="/images/logo.png" alt="Logo" />
        </Link>
        <div className="cs-side_header_box">
          <h2 className="cs-side_header_heading">
-           Template sidebar com header <br /> copia não comedia.
+           Tem alguma ideia?<br /> Me mande pelos contatos abaixo!
          </h2>
        </div>
        <div className="cs-side_header_box">

@@ -8,11 +8,11 @@ export default function ContactInfoWidget({withIcon, title}) {
       <ul className="cs-menu_widget cs-style1 cs-mp0" style={{color:'white'}}>
         <li>
           {withIcon?<span className='cs-accent_color'><Icon icon="material-symbols:add-call-rounded" /></span>:''}
-          +12 997858024
+          +55 12 99622-9081
         </li>
         <li>
           {withIcon?<span className='cs-accent_color'><Icon icon="mdi:envelope" /></span>:''}
-          eliseu441@gmail.com
+          bruno@hotmail.com
         </li>
       </ul>
     </>
