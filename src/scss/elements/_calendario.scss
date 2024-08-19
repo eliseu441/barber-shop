@@ -1,3 +1,4 @@
+
 .rbc-button-link {
   width: 100%;
 }
@@ -5,15 +6,20 @@
   font-size: 1rem;
 }
 .pagina-calendario {
-  height: 100dvh;
+  padding-top: 100px!important;
+  min-height: 100dvh;
   width: 100vw;
-  background: rgb(40, 40, 40);
-  background: linear-gradient(75deg, rgb(59, 59, 59) 0%, rgb(14, 14, 14) 100%);
+  padding-bottom: 30px;
+  background-image: url("/images/barbearia/bg_calendar.jpg");
+  background-size: contain;
 
   .rbc-today {
-    background-color: rgb(255, 233, 192);
+    background: rgb(230,180,42);
+    background: linear-gradient(0deg, rgb(98, 231, 72) 0%, rgb(199, 255, 185) 90%);
   }
   .rbc-day-bg {
+    background: rgb(230,180,42);
+    background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(208, 218, 255) 90%);
     border-radius: 5px;
   }
   .rbc-date-cell {
@@ -36,6 +42,13 @@
     border-bottom: 2px solid rgb(61, 145, 255);
     background-color: rgb(191, 219, 255);
   }
+  .rbc-off-range .rbc-button-link {
+    border-bottom: 0;
+    background-color: #eaeaea;
+    pointer-events: none;
+
+
+  }
   .rbc-time-header .rbc-button-link {
     color: rgb(48, 48, 48);
     font-family: 'Roboto', sans-serif;
@@ -56,7 +69,8 @@
     border: 1px solid rgb(116, 116, 116);
   }
   .rbc-off-range-bg {
-    background-color: rgb(235, 235, 235);
+    background: rgb(219, 219, 219);
+background: linear-gradient(0deg, rgb(210, 210, 210) 0%, rgb(245, 245, 245) 90%);
   }
 }
 .rbc-header span {

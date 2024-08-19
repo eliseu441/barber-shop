@@ -27,6 +27,13 @@ const Calendario = () => {
   }, [usuario, perfil]);
 
   useEffect(() => {
+    const modal = new window.bootstrap.Modal(document.getElementById('exampleModal'));
+    modal.show();
+  }, []);
+
+
+
+  useEffect(() => {
     const monthTranslations = {
       'January': 'janeiro',
       'February': 'fevereiro',
@@ -82,12 +89,10 @@ const Calendario = () => {
       alert('Agendamento não permitido para este usuário.');
       return;
     }
-
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-
-    if (start < today || start.toDateString() !== end.toDateString()) {
-      alert('O evento deve começar e terminar no mesmo dia, e não pode ser em datas anteriores a hoje.');
+    if (start.toDateString() !== end.toDateString()) {
+      alert('O evento deve começar e terminar no mesmo dia.');
       return;
     }
 
@@ -96,11 +101,11 @@ const Calendario = () => {
     );
 
     if (isCollision) {
-      alert('O horário do novo evento colide com um evento existente.');
+      alert('O horário do novo agendamento colide com um agendamento existente.');
       return;
     }
 
-    const title = window.prompt('Novo evento:');
+    const title = window.prompt('Novo agendamento:');
     if (title) {
       const formattedStart = moment(start).format('YYYY-MM-DDTHH:mm:ss');
       const formattedEnd = moment(end).format('YYYY-MM-DDTHH:mm:ss');
@@ -110,20 +115,20 @@ const Calendario = () => {
         const response = await APIS.insertDates(newEvent);
         setEvents([...events, response.data]);
       } catch (error) {
-        console.error('Erro ao criar evento:', error);
-        alert('Erro ao criar evento. Tente novamente.');
+        console.error('Erro ao criar agendamento:', error);
+        alert('Erro ao criar agendamento. Tente novamente.');
       }
     }
   };
 
   const handleDeleteEvent = async (event) => {
-    if (window.confirm(`Deseja realmente deletar o evento "${event.title}"?`)) {
+    if (window.confirm(`Deseja realmente deletar o agendamento "${event.title}"?`)) {
       try {
         await APIS.deleteDate(event.id);
         setEvents(events.filter(e => e.id !== event.id));
       } catch (error) {
-        console.error('Erro ao deletar evento:', error);
-        alert('Erro ao deletar evento. Tente novamente.');
+        console.error('Erro ao deletar agendamento:', error);
+        alert('Erro ao deletar agendamento. Tente novamente.');
       }
     }
   };
@@ -159,7 +164,7 @@ const Calendario = () => {
         style={{
           height: '90vh',
           width: '90%',
-          backgroundColor: 'rgb(255, 255, 255)',
+          backgroundColor: 'rgb(200, 200, 200)',
           padding: '10px',
           borderRadius: '5px',
           fontFamily: 'Roboto, sans-serif',
@@ -168,6 +173,7 @@ const Calendario = () => {
         }}
       />
     </div>
+    
   );
 };
 
