@@ -5,9 +5,9 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --outDir ./monolit/portal",
-    "preview": "vite preview --outDir ./monolit/portal",
-    "build-css": "sass src/scss/elements/layout.scss monolit/portal/style.css"
+    "build": "vite build --outDir /monolit/portal",
+    "preview": "vite preview --outDir /monolit/portal",
+    "build-css": "sass src/scss/elements/layout.scss dist/style.css"
   },
   "dependencies": {
     "@fullcalendar/daygrid": "^6.1.15",

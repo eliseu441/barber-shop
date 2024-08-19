@@ -15,7 +15,6 @@ import "slick-carousel/slick/slick-theme.css";
 function App() {
   return (
     <HashRouter>
-      <Header/>
       <Routes>
         <Route path="/" element={<Cadastro />} />
         <Route path="/barber" element={<Barber />} />

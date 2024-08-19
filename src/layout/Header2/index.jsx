@@ -27,7 +27,9 @@ export default function Header({ variant }) {
     };
   }, []);
 
-  return perfil ? (
+  return 
+  (<>
+  perfil ? 
     <>
     <header
       className={`cs-site_header cs-style1 text-uppercase ${
@@ -167,5 +169,7 @@ export default function Header({ variant }) {
      </div>
    </div>
    </>
-  ) : null;
+   :
+  null
+  </>);
 }
