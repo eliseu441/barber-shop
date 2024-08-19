@@ -2,12 +2,13 @@
   "name": "barber-shop",
   "homepage": ".",
   "private": true,
-  "version": "0.0.0","scripts": {
-  "dev": "vite",
-  "build": "vite build",
-  "preview": "vite preview",
-  "build-css": "sass src/scss/elements/layout.scss dist/style.css"
-},
+ "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "build-css": "sass src/scss/elements/layout.scss dist/style.css"
+  },
   "dependencies": {
     "@fullcalendar/daygrid": "^6.1.15",
     "@fullcalendar/react": "^6.1.15",
