@@ -47,6 +47,7 @@ const Cadastro = () => {
     };
 
     const check = async (e, tipo) => {
+        setIsLoading(true)
         if (tipo === 1) {
             try {
                 await insertUser();
@@ -72,6 +73,7 @@ const Cadastro = () => {
                 console.error('Erro ao buscar usuário:', error);
             }
         }
+        setIsLoading(false);
     };
 
     const toggleBlackBlock = () => {

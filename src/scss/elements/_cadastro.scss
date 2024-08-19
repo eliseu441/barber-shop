@@ -250,6 +250,8 @@
     }
 }
 
+
+
 .button-red {
     button {
         --green: #fd1b1b;
@@ -310,41 +312,45 @@
     box-shadow: 2px 2px 7px 0 rgb(0, 0, 0, 0.2);
     outline: none;
     color: dimgray;
-  }
-  
-  .input:invalid {
+}
+
+.input:invalid {
     animation: justshake 0.3s forwards;
     color: red;
-  }
-  
-  @keyframes justshake {
+}
+
+@keyframes justshake {
     25% {
-      transform: translateX(5px);
+        transform: translateX(5px);
     }
-  
+
     50% {
-      transform: translateX(-5px);
+        transform: translateX(-5px);
     }
-  
+
     75% {
-      transform: translateX(5px);
+        transform: translateX(5px);
     }
-  
+
     100% {
-      transform: translateX-(5px);
+        transform: translateX-(5px);
     }
-  }
-  .formInputs input{
+}
+
+.formInputs input {
     background-color: #f1f1f1;
     border-radius: 6px;
     border: 1px solid rgb(83, 83, 83);
     border-left: 5px solid rgb(83, 83, 83);
     height: 35px;
-    &:hover{
-      background-color: rgb(230, 253, 252);
-      transition: all 0.3s;
+
+    &:hover {
+        background-color: rgb(230, 253, 252);
+        transition: all 0.3s;
     }
-    &:focus,&:active{
+
+    &:focus,
+    &:active {
         border-color: rgb(148, 0, 0);
     }
-  }
+}

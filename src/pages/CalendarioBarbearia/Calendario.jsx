@@ -6,32 +6,76 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import { useAppParams } from '../../layout/AppParams/AppParams.jsx';
-
 moment.locale('pt-br');
-
 const localizer = momentLocalizer(moment);
 
 const Calendario = () => {
   const { usuario, perfil } = useAppParams();
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [closeAdvice, setCloseAdvice] = useState(true);
+
 
   useEffect(() => {
     console.log('Usuário:', usuario);
     console.log('Perfil:', perfil);
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    getDates();
+    const fetchEvents = async () => {
+      try {
+        const response = await APIS.allDates();
+        const formattedEvents = response.data.map(event => ({
+          id: event.id,
+          title: event.title,
+          start: new Date(event.start),
+          end: new Date(event.end)
+        }));
+        setEvents(formattedEvents);
+      } catch (err) {
+        console.error('Erro ao buscar eventos:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchEvents();
+
+    const intervalId = setInterval(() => {
+      fetchEvents();
+    }, 60000);
+
+    return () => clearInterval(intervalId);
   }, [usuario, perfil]);
 
   useEffect(() => {
-    const modal = new window.bootstrap.Modal(document.getElementById('exampleModal'));
-    modal.show();
-  }, []);
+    function darkenColor(hex, percent) {
+      // Converte o hex para RGB
+      const r = parseInt(hex.substring(1, 3), 16);
+      const g = parseInt(hex.substring(3, 5), 16);
+      const b = parseInt(hex.substring(5, 7), 16);
 
+      // Aplica o fator de escurecimento
+      const darken = (value) => Math.max(0, Math.min(255, Math.floor(value * (1 - percent))));
 
+      const dr = darken(r);
+      const dg = darken(g);
+      const db = darken(b);
+
+      // Converte de volta para hex
+      const toHex = (num) => num.toString(16).padStart(2, '0');
+      return `#${toHex(dr)}${toHex(dg)}${toHex(db)}`;
+    }
+
+    function getDarkPrimaryColor() {
+      // Lista de cores primárias exceto vermelho
+      const primaryColors = ['#0000FF', '#00FF00', '#FFFF00']; // Azul, Verde, Amarelo
+      const randomIndex = Math.floor(Math.random() * primaryColors.length);
+      const color = primaryColors[randomIndex];
+      return darkenColor(color, 0.3); // Escurece a cor em 30%
+    }
+    document.querySelectorAll('.rbc-event').forEach(event => {
+      event.style.backgroundColor = getDarkPrimaryColor();
+    })
+  }, [events, closeAdvice]);
 
   useEffect(() => {
     const monthTranslations = {
@@ -69,35 +113,38 @@ const Calendario = () => {
     }
   }, []);
 
-  const getDates = async () => {
-    try {
-      const response = await APIS.allDates();
-      const formattedEvents = response.data.map(event => ({
-        id: event.id,
-        title: event.title,
-        start: new Date(event.start),
-        end: new Date(event.end)
-      }));
-      setEvents(formattedEvents);
-    } catch (err) {
-      console.error('Erro ao buscar eventos:', err);
-    }
-  };
-
   const handleSelectSlot = async ({ start, end }) => {
     if (perfil !== 1) {
       alert('Agendamento não permitido para este usuário.');
       return;
     }
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    if (start.toDateString() !== end.toDateString()) {
+
+    // Cria uma instância do momento para a data e hora atual
+    const today = moment().startOf('day'); // Começa no início do dia atual
+
+    // Usa moment para comparar datas
+    const startMoment = moment(start).startOf('minute'); // Início do evento
+    const endMoment = moment(end).startOf('minute'); // Fim do evento
+
+    if (startMoment.isBefore(today)) {
+      alert('Não é permitido agendar para uma data anterior ao dia atual.');
+      return;
+    }
+
+    if (startMoment.isSameOrAfter(endMoment)) {
+      alert('O evento deve começar antes de terminar.');
+      return;
+    }
+
+    if (!startMoment.isSame(endMoment, 'day')) {
       alert('O evento deve começar e terminar no mesmo dia.');
       return;
     }
 
+    // Verifica se há colisão com eventos existentes
     const isCollision = events.some(event =>
-      (start < event.end && end > event.start)
+      startMoment.isBefore(moment(event.end)) &&
+      endMoment.isAfter(moment(event.start))
     );
 
     if (isCollision) {
@@ -107,20 +154,20 @@ const Calendario = () => {
 
     const title = window.prompt('Novo agendamento:');
     if (title) {
-      const formattedStart = moment(start).format('YYYY-MM-DDTHH:mm:ss');
-      const formattedEnd = moment(end).format('YYYY-MM-DDTHH:mm:ss');
+      const formattedStart = startMoment.format('YYYY-MM-DDTHH:mm:ss');
+      const formattedEnd = endMoment.format('YYYY-MM-DDTHH:mm:ss');
       const newEvent = { title, start: formattedStart, end_time: formattedEnd, description: '', user_id: 1, viewer_id: 1 };
 
       try {
         const response = await APIS.insertDates(newEvent);
-        setEvents([...events, response.data]);
+        setEvents(prevEvents => [...prevEvents, response.data]); // Atualiza o estado de forma imutável
       } catch (error) {
         console.error('Erro ao criar agendamento:', error);
         alert('Erro ao criar agendamento. Tente novamente.');
       }
     }
+    window.location.reload()()
   };
-
   const handleDeleteEvent = async (event) => {
     if (window.confirm(`Deseja realmente deletar o agendamento "${event.title}"?`)) {
       try {
@@ -131,6 +178,7 @@ const Calendario = () => {
         alert('Erro ao deletar agendamento. Tente novamente.');
       }
     }
+    window.location.reload()
   };
 
   const messages = {
@@ -150,30 +198,45 @@ const Calendario = () => {
   };
 
   return (
-    <div className="pagina-calendario col-sm-12 d-flex justify-content-center align-items-center">
-      {isLoading && <Preloader />}
-      <Calendar
-        selectable
-        localizer={localizer}
-        events={events}
-        startAccessor="start"
-        endAccessor="end"
-        onSelectSlot={handleSelectSlot}
-        onSelectEvent={handleDeleteEvent}
-        messages={messages}
-        style={{
-          height: '90vh',
-          width: '90%',
-          backgroundColor: 'rgb(200, 200, 200)',
-          padding: '10px',
-          borderRadius: '5px',
-          fontFamily: 'Roboto, sans-serif',
-          fontSize: '1rem',
-          color: 'black'
-        }}
-      />
-    </div>
-    
+    <>
+      {closeAdvice ?
+        <div class="button-calendar ">
+
+          <div class="card ">
+            <div class="message-text-container">
+              <p class="message-text">Informações de uso</p>
+              <p class="sub-text">apenas um horario por dia pode ser agendado, <br></br>para agendar clique no <p style={{ color: 'red', fontWeight: 'bolder' }}>numero do dia destacado em azul!</p></p>
+
+            </div>
+
+
+          </div>
+        </div>
+        : <></>}
+      <div className="pagina-calendario col-sm-12 d-flex justify-content-center align-items-center">
+        {isLoading && <Preloader />}
+        <Calendar
+          selectable
+          localizer={localizer}
+          events={events}
+          startAccessor="start"
+          endAccessor="end"
+          onSelectSlot={handleSelectSlot}
+          onSelectEvent={handleDeleteEvent}
+          messages={messages}
+          style={{
+            height: '90vh',
+            width: '90%',
+            backgroundColor: 'rgb(200, 200, 200)',
+            padding: '10px',
+            borderRadius: '5px',
+            fontFamily: 'Roboto, sans-serif',
+            fontSize: '1rem',
+            color: 'black'
+          }}
+        />
+      </div>
+    </>
   );
 };
 
