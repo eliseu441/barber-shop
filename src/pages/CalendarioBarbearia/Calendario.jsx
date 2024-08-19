@@ -200,7 +200,7 @@ const Calendario = () => {
   return (
     <>
       {closeAdvice ?
-        <div class="button-calendar ">
+        <div class="button-calendar " onClick={e=> setCloseAdvice(false)}>
 
           <div class="card ">
             <div class="message-text-container">

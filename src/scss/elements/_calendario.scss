@@ -5,6 +5,7 @@
   z-index: 5;
   padding-bottom: 20px!important;
   .card {
+    cursor: pointer;
       width: 330px;
       height: 120px;
       border-radius: 8px;
@@ -18,9 +19,13 @@
       align-items: center;
       justify-content: space-around;
       gap: 15px;
+      &:hover{
+        border-right: 7px solid red;
+      }
   }
-
+  
   .wave {
+    cursor: pointer;
       position: absolute;
       transform: rotate(90deg);
       left: -31px;
